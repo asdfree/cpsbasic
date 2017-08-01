@@ -6,14 +6,15 @@ cpsbasic_cat <-
 	get_catalog( "cpsbasic" ,
 		output_dir = file.path( getwd() ) )
 
-# 2015 only
-cpsbasic_cat <- subset( cpsbasic_cat , year == 2015 )
+# march 2016 only
+cpsbasic_cat <- subset( cpsbasic_cat , year == 2016 & month == 3 )
 # download the microdata to your local computer
 stopifnot( nrow( cpsbasic_cat ) > 0 )
 
 library(survey)
 
-cpsbasic_df <- readRDS( file.path( getwd() , "2016 03 cps basic.rds" ) )
+cpsbasic_df <- 
+	readRDS( file.path( getwd() , "2016 03 cps basic.rds" ) )
 
 cpsbasic_design <- 
 	svydesign( 
