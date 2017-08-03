@@ -17,13 +17,13 @@ cpsbasic_df <-
 	readRDS( file.path( getwd() , "2017 03 cps basic.rds" ) )
 
 # construct a fake survey design
-warning( "this survey design produces correct point estimates but incorrect standard errors." )
+warning( "this survey design produces correct point estimates
+but incorrect standard errors." )
 cpsbasic_design <- 
 	svydesign( 
 		~ 1 , 
 		data = cpsbasic_df , 
-		weights = ~ pwsswgt , 
-		nest = TRUE 
+		weights = ~ pwsswgt
 	)
 cpsbasic_design <- 
 	update( 
