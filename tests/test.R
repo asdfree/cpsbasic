@@ -29,7 +29,7 @@ cpsbasic_design <-
 	update( 
 		cpsbasic_design , 
 		
-		pesex = factor( pesex , labels = c( 'male' , 'female' ) ) ,
+		pesex = factor( pesex , levels = 1:2 , labels = c( 'male' , 'female' ) ) ,
 		
 		prempnot = factor( prempnot , levels = 1:4 ,
 			labels = c( "employed" , "unemployed" , "nilf-discouraged" , "nilf-other" ) ) ,
