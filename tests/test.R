@@ -29,6 +29,8 @@ cpsbasic_design <-
 	update( 
 		cpsbasic_design , 
 		
+		one = 1 ,
+		
 		pesex = factor( pesex , levels = 1:2 , labels = c( 'male' , 'female' ) ) ,
 		
 		prempnot = factor( prempnot , levels = 1:4 ,
