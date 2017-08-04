@@ -33,15 +33,21 @@ cpsbasic_design <-
 		
 		pesex = factor( pesex , levels = 1:2 , labels = c( 'male' , 'female' ) ) ,
 		
-		prempnot = factor( prempnot , levels = 1:4 ,
-			labels = c( "employed" , "unemployed" , "nilf-discouraged" , "nilf-other" ) ) ,
-		
 		weekly_earnings = ifelse( prernwa == -.01 , NA , prernwa ) ,
 		
 		# exclude anyone whose hours vary
 		weekly_hours = ifelse( pehrusl1 < 0 , NA , pehrusl1 ) ,
 		
-		self_employed = ifelse( peio1cow < 0 , NA , as.numeric( peio1cow %in% c( 6 , 7 ) ) )
+		class_of_worker =
+			factor( peio1cow , levels = 1:8 ,
+				labels = 
+					c( "government - federal" , "government - state" ,
+					"government - local" , "private, for profit" ,
+					"private, nonprofit" , "self-employed, incorporated" ,
+					"self-employed, unincorporated" , "without pay" )
+			) ,
+			
+		part_time = ifelse( pemlr == 1 , as.numeric( pehruslt < 35 ) , NA )
 	)
 sum( weights( cpsbasic_design , "sampling" ) != 0 )
 
@@ -52,15 +58,15 @@ svyby( ~ one , ~ pesex , cpsbasic_design , svytotal )
 svymean( ~ weekly_earnings , cpsbasic_design , na.rm = TRUE )
 
 svyby( ~ weekly_earnings , ~ pesex , cpsbasic_design , svymean , na.rm = TRUE )
-svymean( ~ prempnot , cpsbasic_design , na.rm = TRUE )
+svymean( ~ class_of_worker , cpsbasic_design , na.rm = TRUE )
 
-svyby( ~ prempnot , ~ pesex , cpsbasic_design , svymean , na.rm = TRUE )
+svyby( ~ class_of_worker , ~ pesex , cpsbasic_design , svymean , na.rm = TRUE )
 svytotal( ~ weekly_earnings , cpsbasic_design , na.rm = TRUE )
 
 svyby( ~ weekly_earnings , ~ pesex , cpsbasic_design , svytotal , na.rm = TRUE )
-svytotal( ~ prempnot , cpsbasic_design , na.rm = TRUE )
+svytotal( ~ class_of_worker , cpsbasic_design , na.rm = TRUE )
 
-svyby( ~ prempnot , ~ pesex , cpsbasic_design , svytotal , na.rm = TRUE )
+svyby( ~ class_of_worker , ~ pesex , cpsbasic_design , svytotal , na.rm = TRUE )
 svyquantile( ~ weekly_earnings , cpsbasic_design , 0.5 , na.rm = TRUE )
 
 svyby( 
@@ -108,16 +114,16 @@ svymean( ~ weekly_earnings , cpsbasic_design , na.rm = TRUE , deff = TRUE )
 
 # SRS with replacement
 svymean( ~ weekly_earnings , cpsbasic_design , na.rm = TRUE , deff = "replace" )
-svyciprop( ~ self_employed , cpsbasic_design ,
+svyciprop( ~ part_time , cpsbasic_design ,
 	method = "likelihood" , na.rm = TRUE )
-svyttest( weekly_earnings ~ self_employed , cpsbasic_design )
+svyttest( weekly_earnings ~ part_time , cpsbasic_design )
 svychisq( 
-	~ self_employed + prempnot , 
+	~ part_time + class_of_worker , 
 	cpsbasic_design 
 )
 glm_result <- 
 	svyglm( 
-		weekly_earnings ~ self_employed + prempnot , 
+		weekly_earnings ~ part_time + class_of_worker , 
 		cpsbasic_design 
 	)
 
