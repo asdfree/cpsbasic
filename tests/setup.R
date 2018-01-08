@@ -1,7 +1,5 @@
 if ( .Platform$OS.type == 'windows' ) memory.limit( 256000 )
 
-library(lodown)
-lodown( "cpsbasic" , output_dir = file.path( getwd() ) )
 this_sample_break <- Sys.getenv( "this_sample_break" )
 cpsbasic_cat <- get_catalog( "cpsbasic" , output_dir = file.path( getwd() ) )
 record_categories <- ceiling( seq( nrow( cpsbasic_cat ) ) / ceiling( nrow( cpsbasic_cat ) / 20 ) )
@@ -17,7 +15,7 @@ cpsbasic_cat <-
 # march 2017 only
 cpsbasic_cat <- subset( cpsbasic_cat , year == 2017 & month == 3 )
 # download the microdata to your local computer
-lodown( "cpsbasic" , cpsbasic_cat )
+
 
 library(survey)
 
