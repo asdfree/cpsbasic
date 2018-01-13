@@ -1,5 +1,7 @@
 if ( .Platform$OS.type == 'windows' ) memory.limit( 256000 )
 
+options("lodown.cachaca.savecache"=FALSE)
+
 library(lodown)
 this_sample_break <- Sys.getenv( "this_sample_break" )
 cpsbasic_cat <- get_catalog( "cpsbasic" , output_dir = file.path( getwd() ) )
