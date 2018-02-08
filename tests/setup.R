@@ -7,17 +7,17 @@ this_sample_break <- Sys.getenv( "this_sample_break" )
 cpsbasic_cat <- get_catalog( "cpsbasic" , output_dir = file.path( getwd() ) )
 record_categories <- ceiling( seq( nrow( cpsbasic_cat ) ) / ceiling( nrow( cpsbasic_cat ) / 20 ) )
 cpsbasic_cat <- cpsbasic_cat[ record_categories == this_sample_break , ]
-lodown( "cpsbasic" , cpsbasic_cat )
+cpsbasic_cat <- lodown( "cpsbasic" , cpsbasic_cat )
 if( any( cpsbasic_cat$year == 2017 & cpsbasic_cat$month == 3 ) ){
-library(lodown)
-# examine all available CPSBASIC microdata files
-cpsbasic_cat <-
-	get_catalog( "cpsbasic" ,
-		output_dir = file.path( getwd() ) )
 
-# march 2017 only
-cpsbasic_cat <- subset( cpsbasic_cat , year == 2017 & month == 3 )
-# download the microdata to your local computer
+
+
+
+
+
+
+
+
 
 
 library(survey)
