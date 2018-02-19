@@ -4,7 +4,7 @@ Title: cpsbasic
 Version: 0.1.0
 Author: Anthony Joseph Damico
 Maintainer: Anthony Joseph Damico <ajdamico@gmail.com>
-Description: A continuous integration package, tested on ajdamico/asdfree commit 9c3a99b5ac6632a4d027089a80842ccfc3b18b2b ajdamico/lodown commit a474ab47727678575a9aac5721e3f4f11c99d434
+Description: A continuous integration package, tested on  ajdamico/lodown commit a474ab47727678575a9aac5721e3f4f11c99d434
 License: GPL-3
 Imports: survey, lodown, srvyr
 Encoding: UTF-8
