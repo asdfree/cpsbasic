@@ -5,7 +5,7 @@ options("lodown.cachaca.savecache"=FALSE)
 library(lodown)
 this_sample_break <- Sys.getenv( "this_sample_break" )
 cpsbasic_cat <- get_catalog( "cpsbasic" , output_dir = file.path( getwd() ) )
-record_categories <- ceiling( seq( nrow( cpsbasic_cat ) ) / ceiling( nrow( cpsbasic_cat ) / 25 ) )
+record_categories <- ceiling( seq( nrow( cpsbasic_cat ) ) / ceiling( nrow( cpsbasic_cat ) / 20 ) )
 cpsbasic_cat <- cpsbasic_cat[ record_categories == this_sample_break , ]
 cpsbasic_cat <- lodown( "cpsbasic" , cpsbasic_cat )
 if( any( cpsbasic_cat$year == 2017 & cpsbasic_cat$month == 3 ) ){
